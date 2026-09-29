@@ -1,0 +1,19 @@
+services:
+  web:
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: "3000"
+      APP_ENV: local
+      WELCOME_MESSAGE: Hello from Shipyard
+    labels:
+      shipyard.route: "/"
+      shipyard.primary-route: "true"
+      shipyard.readiness.http.path: "/api/health"
+      shipyard.readiness.initial_delay: "5"
+      shipyard.readiness.period: "10"
+      shipyard.liveness.http.path: "/api/health"
+      shipyard.liveness.initial_delay: "10"
+      shipyard.liveness.period: "15"
